@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate Code",
+      "type": "shell",
+      "command": "dart",
+      "args": [
+        "run",
+        "build_runner",
+        "build",
+        "--delete-conflicting-outputs"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Demo Prep (Windows)",
+      "type": "shell",
+      "command": "scripts\\demo_prep.bat",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Integration Test",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "test",
+        "integration_test/app_e2e_test.dart"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Integration Test (Device)",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "test",
+        "integration_test/app_e2e_test.dart",
+        "-d",
+        "windows"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run App",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "run"
+      ],
+      "group": "none",
+      "problemMatcher": []
+    }
+  ]
+}
