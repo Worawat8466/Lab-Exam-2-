@@ -66,11 +66,23 @@
 - ทำ **Integration tests** ทดสอบแบบ E2E จบทุก Flows ใน App ทะลุแบบอัตโนมัติ
 
 ## 5) ⚙️ การตั้งค่าสภาพแวดล้อม (Environment Setup)
-เพื่อความปลอดภัย ก่อนทดสอบโปรแกรมโปรดสร้างไฟล์ `.env` ที่ root folder ของโปรเจกต์ (ไม่ต้องแนบลงระบบ Git):
+โปรเจกต์นี้รองรับการโหลดค่า config แบบปลอดภัยหลัง clone ได้ทันที โดยมี fallback ดังนี้:
+- โหลด `.env` ก่อน (ถ้ามี)
+- ถ้าไม่มี จะ fallback ไป `.env.example` อัตโนมัติ
+
+แนะนำให้สร้างไฟล์ `.env` ของตัวเองที่ root folder (ไม่ต้องแนบลงระบบ Git):
 
 ```dotenv
 GEMINI_API_KEY=your_real_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
+```
+
+และสามารถเพิ่มค่าโมเดลอื่นได้ตามต้องการ เช่น:
+
+```dotenv
+GEMINI_SCAN_MODEL=gemini-2.5-flash
+GEMINI_CATEGORY_MODEL=gemini-2.5-flash
+GEMINI_INSIGHT_MODEL=gemini-2.5-pro
 ```
 
 ## 6) 🚀 คำสั่งสำหรับรันโปรเจกต์ (Run Commands)
@@ -78,6 +90,15 @@ GEMINI_MODEL=gemini-2.5-flash
 **ติดตั้ง Library เเละ Dependencies:**
 ```bash
 flutter pub get
+```
+
+**(แนะนำ) สร้าง `.env` จากตัวอย่าง:**
+```bash
+# Windows PowerShell
+Copy-Item .env.example .env
+
+# macOS / Linux
+cp .env.example .env
 ```
 
 **สั่งสร้าง Code Generator (เมื่อมีการเเก้ตัว Data Model เเละ Route):**
@@ -96,6 +117,17 @@ flutter test
 flutter test integration_test/app_e2e_test.dart
 flutter test integration_test/scan_receipt_device_test.dart
 ```
+
+## 6.1) 🧯 ปัญหาที่พบบ่อยหลังโหลดจาก GitHub
+
+**อาการ:** `No file or variants found for asset: .env`
+
+**สาเหตุ:** ไม่มีไฟล์ `.env` ในเครื่อง (ซึ่งเป็นปกติเพราะถูก ignore ด้านความปลอดภัย)
+
+**วิธีแก้:**
+- รัน `flutter pub get`
+- สร้าง `.env` จาก `.env.example` แล้วใส่ API key จริง
+- หรือปล่อยว่างไว้ก่อนก็ได้ แอปจะใช้ `.env.example` ชั่วคราว
 
 ## 7) ✅ เช็คลิสต์ตรวจสอบก่อนการให้คะแนน (Final Submission Checklist)
 

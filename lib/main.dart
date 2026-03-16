@@ -7,7 +7,11 @@ import 'app/di/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+  try {
+    await dotenv.load(fileName: '.env');
+  } catch (_) {
+    await dotenv.load(fileName: '.env.example');
+  }
   await configureDependencies();
   runApp(const ProviderScope(child: AiReceiptTrackerApp()));
 }
