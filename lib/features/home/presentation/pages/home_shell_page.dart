@@ -23,6 +23,7 @@ import '../../../settings/presentation/providers/theme_mode_controller.dart';
 import '../../../dashboard/domain/entities/dashboard_summary.dart';
 import '../../../dashboard/presentation/providers/ai_insight_notifier.dart';
 
+@RoutePage()
 class HomeShellPage extends ConsumerStatefulWidget {
   const HomeShellPage({super.key});
 
